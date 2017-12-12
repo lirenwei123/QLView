@@ -16,9 +16,7 @@
     manager(M);
 }
 
--(void)tapEvent:(void (^)(UIView *))tapEvent{
-    objc_setAssociatedObject(self, @"key", tapEvent, OBJC_ASSOCIATION_RETAIN);
-}
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     void (^block)(UIView *)  = objc_getAssociatedObject(self, @"key");
@@ -27,5 +25,8 @@
     }
 
 }
+
+
+
 
 @end

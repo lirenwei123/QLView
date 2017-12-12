@@ -21,24 +21,27 @@
     UIView *v = [[UIView alloc]init];
     v.backgroundColor =  [UIColor grayColor];
     [v ql_setView:^(QLViewManager *m) {
-        m.x(0).y(0).w(100).h(100).position(self.view.center).cornerRadious(10);
-    }];
+        void(^touch)(UIView *) =  ^(UIView *view){
+            [view ql_setView:^(QLViewManager *m) {
+                m.h(m.view.frame.size.height + 20).w(m.view.frame.size.width + 20).position(self.view.center);
+            }];
+        };
 
-
-    [v tapEvent:^(UIView *view) {
-        [view ql_setView:^(QLViewManager *m) {
-            m.h(m.view.frame.size.height + 20).w(m.view.frame.size.width + 20).position(self.view.center);
-        }];
+        m.x(0).y(0).w(100).h(100).position(self.view.center).cornerRadious(10).tapEvent(touch);
     }];
 
     [self.view addSubview:v];
 
 
-    [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+
+ NSTimer *timer =  [NSTimer scheduledTimerWithTimeInterval:0.1 repeats:YES block:^(NSTimer * _Nonnull timer) {
 
             v.transform = CGAffineTransformRotate(v.transform, M_PI/4);
 
     }];
+
+    [[NSRunLoop currentRunLoop]addTimer:timer forMode:NSRunLoopCommonModes];
+
 
 
 }

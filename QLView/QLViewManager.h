@@ -25,6 +25,7 @@
 -(QLViewManager*(^)(CGPoint p))anchorPosition;
 -(QLViewManager*(^)(CGFloat cornerRadious))cornerRadious;
 -(QLViewManager*(^)(UIView *view))addSubview;
+-(QLViewManager*(^)(void(^)(UIView *v)))tapEvent;
 
 
 @end

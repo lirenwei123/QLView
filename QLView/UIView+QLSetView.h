@@ -12,5 +12,5 @@
 @interface UIView (QLSetView)
 
 -(void)ql_setView:(void (^)(QLViewManager *m))manager;
--(void)tapEvent:(void(^)(UIView *view))tapEvent;
+
 @end

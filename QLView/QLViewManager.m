@@ -7,6 +7,7 @@
 //
 
 #import "QLViewManager.h"
+#import <objc/runtime.h>
 
 
 
@@ -104,7 +105,13 @@
     };
 }
 
-
+-(QLViewManager *(^)(void (^)(UIView *)))tapEvent{
+    __weak typeof(self) wsf = self;
+    return ^(void (^tap)(UIView *)){
+        objc_setAssociatedObject(wsf.view, @"key", tap, OBJC_ASSOCIATION_COPY);
+        return wsf;
+    };
+}
 
 
 
